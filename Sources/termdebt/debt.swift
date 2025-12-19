@@ -5,7 +5,7 @@
 import Foundation
 import SwiftData
 
-struct Debt: Decodable {
+struct Debt: Codable {
     let name: String
     let principal: Decimal
     let apy: Decimal

@@ -5,9 +5,11 @@
 // https://swiftpackageindex.com/apple/swift-argument-parser/documentation
 
 import ArgumentParser
+import Foundation
 
 @main
 struct termdebt: ParsableCommand {
+    
     static let configuration = CommandConfiguration(
         abstract: "A utility for managing debt",
         usage: "termdebt <command> <options>",
@@ -32,7 +34,9 @@ struct List: ParsableCommand {
             print("Locale set to: \(locale)")
         }
         do {
-            let debts = try SampleDebtLoader.load()
+            #if DEBUG
+                let debts = try File.load()
+            #endif
             debts.forEach {
                 print("\($0.name): \($0.principal) @ \($0.apy)%")
             }

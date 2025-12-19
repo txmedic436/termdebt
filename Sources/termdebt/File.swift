@@ -1,6 +1,6 @@
 import Foundation
 
-enum SampleDebtLoader {
+enum File {
     static func load() throws -> [Debt] {
         let cwd = FileManager.default.currentDirectoryPath
         let url = URL(fileURLWithPath: cwd)
@@ -17,6 +17,24 @@ enum SampleDebtLoader {
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder.debtDecoder()
         return try decoder.decode([Debt].self, from: data)
+    }
+
+    static func save(_ debts: [Debt], to url: URL) throws {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        encoder.dateEncodingStrategy = .iso8601
+
+        let data = try encoder.encode(debts)
+
+        let tempURL = url.appendingPathExtension("tmp")
+        try data.write(to: tempURL, options: .atomic)
+
+        try FileManager.default.replaceItemAt(
+            url,
+            withItemAt: tempURL,
+            backupItemName: nil,
+            options: .usingNewMetadataOnly
+        )
     }
 }
 
