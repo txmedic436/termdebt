@@ -1,16 +1,15 @@
 import Foundation
 
-enum File {
-    static func load() throws -> [Debt] {
-        let cwd = FileManager.default.currentDirectoryPath
-        let url = URL(fileURLWithPath: cwd)
-            .appendingPathComponent("SampleDebts.json")
-
+enum DebtStore {
+    static func load(from url: URL) throws -> [Debt] {
         guard FileManager.default.fileExists(atPath: url.path) else {
+            let filenameWithExtention = url.lastPathComponent
             throw NSError(
-                domain: "SampleDebtLoader",
+                domain: "File",
                 code: 1,
-                userInfo: [NSLocalizedDescriptionKey: "SampleDebts.json not found at \(url.path)"]
+                userInfo: [
+                    NSLocalizedDescriptionKey: "\(filenameWithExtention) not found at \(url.path)"
+                ]
             )
         }
 
@@ -26,15 +25,22 @@ enum File {
 
         let data = try encoder.encode(debts)
 
-        let tempURL = url.appendingPathExtension("tmp")
-        try data.write(to: tempURL, options: .atomic)
+        let directory = url.deletingLastPathComponent()
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        try data.write(to: url, options: .atomic)
+    }
+}
 
-        try FileManager.default.replaceItemAt(
-            url,
-            withItemAt: tempURL,
-            backupItemName: nil,
-            options: .usingNewMetadataOnly
-        )
+@available(macOS 11, *)
+enum FileLocation {
+    static func defaultURL() -> URL {
+        #if DEBUG
+            return URL("/Users/chriscolpitts/Developer/termdebt/SampleDebts.json")!
+        #else
+            let path = "~/Library/Application Support/termdebt/debts.json"
+            let expanded = NSString(string: path).expandingTildeInPath
+            return URL(fileURLWithPath: expanded)
+        #endif
     }
 }
 

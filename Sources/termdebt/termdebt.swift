@@ -9,7 +9,7 @@ import Foundation
 
 @main
 struct termdebt: ParsableCommand {
-    
+
     static let configuration = CommandConfiguration(
         abstract: "A utility for managing debt",
         usage: "termdebt <command> <options>",
@@ -26,17 +26,19 @@ struct Options: ParsableArguments {
     var customLocale: String? = nil
 }
 
+struct Add: ParsableCommand {
+    static let configuration = CommandConfiguration(abstract: "Save the debt")
+    @OptionGroup var options: Options
+
+}
+
 struct List: ParsableCommand {
     static let configuration = CommandConfiguration(abstract: "List the debts")
     @OptionGroup var options: Options
     mutating func run() {
-        if let locale = options.customLocale {
-            print("Locale set to: \(locale)")
-        }
         do {
-            #if DEBUG
-                let debts = try File.load()
-            #endif
+            let url = FileLocation.defaultURL()
+            let debts = try DebtStore.load(from: url)
             debts.forEach {
                 print("\($0.name): \($0.principal) @ \($0.apy)%")
             }
