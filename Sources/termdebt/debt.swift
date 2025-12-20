@@ -16,6 +16,14 @@ struct Debt: Codable {
         case name, principal, apy, created, term
     }
 
+    init(name: String, principal: Decimal, apy: Decimal, created: Date = Date(), term: UInt) {
+        self.name = name
+        self.principal = principal
+        self.apy = apy
+        self.created = created
+        self.term = term
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 

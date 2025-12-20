@@ -1,3 +1,4 @@
+import ArgumentParser
 import Foundation
 
 enum DebtStore {
@@ -73,5 +74,15 @@ extension Decimal {
             in: container,
             debugDescription: "Invalid Decimal value"
         )
+    }
+}
+
+extension Date: @retroactive ExpressibleByArgument {
+    public init?(argument: String) {
+        let formatter = ISO8601DateFormatter()
+        guard let date = formatter.date(from: argument) else {
+            return nil
+        }
+        self = date
     }
 }

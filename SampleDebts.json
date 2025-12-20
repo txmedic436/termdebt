@@ -1,44 +1,51 @@
 [
   {
-    "name": "Visa Credit Card",
-    "principal": "4200.75",
-    "apy": "19.99",
-    "created": "2023-04-15T12:00:00Z",
-    "term": 0
+    "apy" : 19.99,
+    "created" : "2023-04-15T12:00:00Z",
+    "name" : "Visa Credit Card",
+    "principal" : 4200.75,
+    "term" : 0
   },
   {
-    "name": "Student Loan",
-    "principal": "18500.00",
-    "apy": "4.25",
-    "created": "2021-09-01T08:30:00Z",
-    "term": 120
+    "apy" : 4.25,
+    "created" : "2021-09-01T08:30:00Z",
+    "name" : "Student Loan",
+    "principal" : 18500,
+    "term" : 120
   },
   {
-    "name": "Car Loan",
-    "principal": "13250.00",
-    "apy": "6.75",
-    "created": "2022-06-10T09:00:00Z",
-    "term": 60
+    "apy" : 6.75,
+    "created" : "2022-06-10T09:00:00Z",
+    "name" : "Car Loan",
+    "principal" : 13250,
+    "term" : 60
   },
   {
-    "name": "Personal Loan",
-    "principal": "5200.00",
-    "apy": "11.50",
-    "created": "2023-01-20T14:45:00Z",
-    "term": 36
+    "apy" : 11.5,
+    "created" : "2023-01-20T14:45:00Z",
+    "name" : "Personal Loan",
+    "principal" : 5200,
+    "term" : 36
   },
   {
-    "name": "Medical Bill",
-    "principal": "2400.00",
-    "apy": "0.00",
-    "created": "2024-02-05T10:15:00Z",
-    "term": 24
+    "apy" : 0,
+    "created" : "2024-02-05T10:15:00Z",
+    "name" : "Medical Bill",
+    "principal" : 2400,
+    "term" : 24
   },
   {
-    "name": "Mortgage",
-    "principal": "285000.00",
-    "apy": "3.875",
-    "created": "2020-07-01T00:00:00Z",
-    "term": 360
+    "apy" : 3.875,
+    "created" : "2020-07-01T00:00:00Z",
+    "name" : "Mortgage",
+    "principal" : 285000,
+    "term" : 360
+  },
+  {
+    "apy" : 29.99,
+    "created" : "2025-12-20T22:24:08Z",
+    "name" : "Master Card",
+    "principal" : 4000,
+    "term" : 0
   }
 ]
